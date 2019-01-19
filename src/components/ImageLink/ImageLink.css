@@ -1,0 +1,8 @@
+.form {
+  width: 600px;
+  height: 100px;
+  align-content:'center';
+  background:
+  linear-gradient(to top, rgb(26, 138, 79), rgb(43, 153, 142));
+  background-size:40px 10px;
+}
