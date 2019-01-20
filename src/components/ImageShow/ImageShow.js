@@ -6,12 +6,14 @@ const ImageShow = ({imageUrl, faceBoxes})=>{
  	<div className='center ma'>
  		<div className='absolute mt2'>
  			<img id='inputimage' alt='' width='500' height='auto' src={imageUrl}/>
+ 			<div classname=''>
  			{faceBoxes.map((faceBox,i)=>{
  				return(
- 						<div key={i} className='bounding-box'style={{top: faceBox.topRow, right: faceBox.rightCol, bottom:faceBox.bottomRow, left: faceBox.leftCol}}></div>
+ 						<div key={i} className='bounding-box' style={{top: faceBox.topRow, right: faceBox.rightCol, bottom:faceBox.bottomRow, left: faceBox.leftCol}}></div>
  					);
  				})
  			}
+ 			</div>
  		</div>
  	</div>
  	);
