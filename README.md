@@ -1,5 +1,5 @@
 
-IMAGE ANALYSER (Front End)
+IMAGE ANALYSER (Front End)<br>
 For Back End code : https://github.com/blitz450/image-analyser-api
 
 ## Available Scripts
