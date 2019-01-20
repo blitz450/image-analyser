@@ -4,7 +4,7 @@ import './ImageShow.css';
 const ImageShow = ({imageUrl, faceBoxes})=>{
  return(
  	<div className=' center ma'>
- 		<div className='absolute mt2'>
+ 		<div className='absolute mv2'>
  			{(!imageUrl.length)
  				? <img  alt='' width='700px' height='auto' src='https://santoshanand.me/gallery/welcome.jpg'/>
  				: <div>
