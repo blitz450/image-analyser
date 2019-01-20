@@ -24,7 +24,7 @@ const particlesOptions = {
 }
 const initialState={
       input: '',
-      imageUrl: '',
+      imageUrl: 'https://santoshanand.me/gallery/welcome.jpg',
       faceBoxes:[],
       route:'signin' ,
       isSignedIn: false,
