@@ -85,7 +85,7 @@ class App extends Component {
       })
       .then(response => response.json())
       .then(response=>{
-        if(response){
+        if(response.outputs.length){
           fetch('https://image-analyser-api.herokuapp.com/image', {
             method:'put',
             headers:{ 'Content-Type': 'application/json'},
@@ -96,8 +96,8 @@ class App extends Component {
           .then(response=>response.json())
           .then(newentries=>this.setState(Object.assign(this.state.user,{entries:newentries})))
           .catch(console.log);
+          this.setFaceBoxes(this.calculateFaceBoxes(response))
         }
-        this.setFaceBoxes(this.calculateFaceBoxes(response))
       })
       .catch(console.log);
   }
