@@ -48,7 +48,7 @@ class Register extends React.Component{
 	const {onRouteChange}=this.props;
 	return (
 	    <div>
-	      <article className="mw6 center  br3 pa3 mv4 ba b--black-10 shadow-5 bg-light-blue">
+	      <article className="mw6 center  br3 pa2 mv4 ba b--black-10 shadow-5 bg-light-blue">
 		      <main className="pa3 pb2 black-80">
 				  <div method='post' className="measure">
 				    <fieldset id="register" className="ba b--transparent ph0 mh0">

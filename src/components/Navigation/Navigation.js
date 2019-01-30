@@ -1,12 +1,12 @@
 import React from 'react';
-import logo from './logo.png';
+import logo from './logo.svg';
 
 const Navigation = ({onRouteChange, isSignedIn})=>{
  return(
  	<nav className="flex justify-between bb bg-black b--white-10 " >
- 		<div className='flex justify-start'>
-	 		<img src={logo} className="App-logo mt2 ml3" alt="logo"/>
-	 		<p className='f4 white mh2' > Image Analyser </p>
+ 		<div className='flex justify-start items-center'>
+	 		<img src={logo} className=" App-logo pa2 " alt="logo"/>
+	 		<p className='f4 white ph1' > Image Analyser </p>
 	 	</div>
  		{isSignedIn?
 	 	<div className="flex-grow flex justify-end items-center">
