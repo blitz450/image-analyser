@@ -3,6 +3,7 @@ import Particles from 'react-particles-js';
 import 'tachyons';
 import './App.css';
 import welcome from './components/ImageShow/welcome.png'
+import url from './components/ImageShow/url.png'
 import Navigation from './components/Navigation/Navigation';
 import About from './components/About/About';
 import Register from './components/Register/Register';
@@ -76,10 +77,14 @@ class App extends Component {
   }
 
   onPictureSubmit = () => {
-    this.setState({imageUrl: this.state.input});
+  	 if(!this.state.input.length)
+  	 	this.setState({imageUrl: url});
+  	 else
+    	this.setState({imageUrl: this.state.input});
+    if(this.state.input!==this.state.imageUrl)
+    this.setState({faceBoxes: []});
     if(this.state.input.length&&this.state.input!==this.state.imageUrl){
-      console.log('fetching and reseting boxes');
-      this.setState({faceBoxes: []});
+      console.log('fetching');
       fetch('https://image-analyser-api.herokuapp.com/imageurl', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
