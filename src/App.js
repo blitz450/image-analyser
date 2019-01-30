@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import 'tachyons';
 import './App.css';
+import welcome from './components/ImageShow/welcome.png'
 import Navigation from './components/Navigation/Navigation';
 import About from './components/About/About';
 import Register from './components/Register/Register';
@@ -9,7 +10,7 @@ import Signin from './components/Signin/Signin';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageLink from './components/ImageLink/ImageLink';
-import ImageShow from './components//ImageShow/ImageShow';
+import ImageShow from './components/ImageShow/ImageShow';
 
 const particlesOptions = {
   particles: {
@@ -24,7 +25,7 @@ const particlesOptions = {
 }
 const initialState={
       input: '',
-      imageUrl: 'https://santoshanand.me/gallery/welcome.jpg',
+      imageUrl: welcome,
       faceBoxes:[],
       route:'signin' ,
       isSignedIn: false,
@@ -76,30 +77,37 @@ class App extends Component {
 
   onPictureSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    fetch('https://image-analyser-api.herokuapp.com/imageurl', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          input: this.state.input
+    // this.setState({faceBoxes: []});
+    if(this.state.input.length&&this.state.input!==this.state.imageUrl){
+      console.log('fetching');
+      fetch('https://image-analyser-api.herokuapp.com/imageurl', {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            input: this.state.input
+          })
         })
-      })
-      .then(response => response.json())
-      .then(response=>{
-        if(response.outputs.length){
-          fetch('https://image-analyser-api.herokuapp.com/image', {
-            method:'put',
-            headers:{ 'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              id: this.state.user.id
-            })
-           })
-          .then(response=>response.json())
-          .then(newentries=>this.setState(Object.assign(this.state.user,{entries:newentries})))
-          .catch(console.log);
-          this.setFaceBoxes(this.calculateFaceBoxes(response))
-        }
-      })
-      .catch(console.log);
+        .then(response => response.json())
+        .then(response=>{
+          if(response.outputs){
+            fetch('https://image-analyser-api.herokuapp.com/image', {
+              method:'put',
+              headers:{ 'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                id: this.state.user.id
+              })
+             })
+            .then(response=>response.json())
+            .then(newentries=>this.setState(Object.assign(this.state.user,{entries:newentries})))
+            .catch(console.log);
+            this.setState({faceBoxes: []});
+            if(response.outputs[0].data.regions){
+              this.setFaceBoxes(this.calculateFaceBoxes(response))
+            }
+          }
+        })
+        .catch(console.log);
+    }
   }
 
   onInputChange = (event) => {
