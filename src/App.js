@@ -77,9 +77,9 @@ class App extends Component {
 
   onPictureSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    // this.setState({faceBoxes: []});
     if(this.state.input.length&&this.state.input!==this.state.imageUrl){
-      console.log('fetching');
+      console.log('fetching and reseting boxes');
+      this.setState({faceBoxes: []});
       fetch('https://image-analyser-api.herokuapp.com/imageurl', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
@@ -100,8 +100,7 @@ class App extends Component {
             .then(response=>response.json())
             .then(newentries=>this.setState(Object.assign(this.state.user,{entries:newentries})))
             .catch(console.log);
-            this.setState({faceBoxes: []});
-            if(response.outputs[0].data.regions){
+             if(response.outputs[0].data.regions){
               this.setFaceBoxes(this.calculateFaceBoxes(response))
             }
           }
