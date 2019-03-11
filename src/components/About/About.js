@@ -6,7 +6,7 @@ const About = ({ onRouteChange})=>{
       <article className="bg-light-blue pb5 vh-100  dt w-100">
 		    <div className="dtc cover ph3 ph4-m ph5-l">
 		      <h1 className=" center f2 f-subheadline-s measure lh-title fw6 helvetica">
-		      	Face Detection App that keeps count of entries made by a user. Please register if you are a new user.
+		      	Face Detection App that keeps count of detections made by a user. Please register if you are a new user.
 		      </h1>
 		      <p className="f5 fw2">
 		      	This is a Single Page App(SPA) built with react.js in the frontend and node.js/postgresql in the backend. Documentation and source code can be found <a href="https://github.com/blitz450/image-analyser" target="_blank" rel="noopener noreferrer" 

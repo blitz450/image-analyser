@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
-import 'tachyons';
 import './App.css';
 import welcome from './components/ImageShow/welcome.png'
 import url from './components/ImageShow/url.png'
@@ -12,6 +11,8 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageLink from './components/ImageLink/ImageLink';
 import ImageShow from './components/ImageShow/ImageShow';
+import Modal from './components/Modal/Modal';
+import Profile from './components/Profile/Profile';
 
 const particlesOptions = {
   particles: {
@@ -30,12 +31,14 @@ const initialState={
       faceBoxes:[],
       route:'signin' ,
       isSignedIn: false,
+      isProfileOpen: false,
       user: {
         id:'',
         name: '',
         email: '',
         entries:0,
-        joined: ''
+        joined: '',
+        age:''
       }
     } 
 
@@ -120,23 +123,36 @@ class App extends Component {
 
   onRouteChange=(route)=>{
     if(route==='signout'){
-      this.setState(initialState);
+      return this.setState(initialState);
     } else if(route==='home'){
         this.setState({isSignedIn:true});
       }
     this.setState({route: route});
   }
 
+  toggleModal = () => {
+      this.setState(state => ({
+        ...state,
+        isProfileOpen: !state.isProfileOpen,
+      }));
+    }
 
   render() {
-    const { imageUrl, faceBoxes, route, isSignedIn, user} = this.state;
+    const { imageUrl, faceBoxes, route, isSignedIn, isProfileOpen, user} = this.state;
     return (
       <div className="App">
           <Particles className='particles'
           params={particlesOptions}
           />
           <Navigation isSignedIn={isSignedIn}
-                       onRouteChange={this.onRouteChange} />
+                       onRouteChange={this.onRouteChange}
+                       toggleModal={this.toggleModal} />
+          {
+            isProfileOpen &&
+            <Modal>
+              <Profile isProfileOpen={isProfileOpen} toggleModal={this.toggleModal} loadUser={this.loadUser} user={user}/>
+            </Modal>
+          }
           {route==='home'
           ?
           <div>
